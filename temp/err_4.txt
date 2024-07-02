@@ -1,0 +1,26 @@
+[ERROR] Migration of schema "watch_migrations" to version "5 - Add orders" failed! Changes successfully rolled back.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.331 s
+[INFO] Finished at: 2024-07-01T16:10:53-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.flywaydb:flyway-maven-plugin:10.10.0:migrate (default-cli) on project watch: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V5__Add_orders.sql failed
+[ERROR] -----------------------------------
+[ERROR] SQL State  : 23503
+[ERROR] Error Code : 0
+[ERROR] Message    : ERROR: insert or update on table "orders" violates foreign key constraint "orders_payment_id_fkey"
+[ERROR]   Detail: Key (payment_id)=(101) is not present in table "payments".
+[ERROR] Location   : /home/nemesis/Documents/allaboutevemirolive/curr_/omega/src/main/resources/db/migration/V5__Add_orders.sql (/home/nemesis/Documents/allaboutevemirolive/curr_/omega/src/main/resources/db/migration/V5__Add_orders.sql)
+[ERROR] Line       : 2
+[ERROR] Statement  : -- Insert an order
+[ERROR] INSERT INTO orders (total_price, date, post_index, user_id, status, payment_id)
+[ERROR] VALUES (9500.50, '2024-06-28 10:30:00', '12345', 11, 'PROCESSING', 101)
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

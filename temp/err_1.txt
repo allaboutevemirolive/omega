@@ -1,0 +1,38 @@
+
+
+[INFO] --- flyway:10.10.0:migrate (default-cli) @ watch ---
+[INFO] Database: jdbc:postgresql://localhost/watch (PostgreSQL 15.7)
+[INFO] Schema history table "watch_migrations"."flyway_schema_history" does not exist yet
+[INFO] Successfully validated 4 migrations (execution time 00:00.025s)
+[INFO] Creating Schema History table "watch_migrations"."flyway_schema_history" ...
+[INFO] Current version of schema "watch_migrations": << Empty Schema >>
+[INFO] Migrating schema "watch_migrations" to version "1 - Init DB"
+[INFO] Migrating schema "watch_migrations" to version "2 - Add users"
+[ERROR] Migration of schema "watch_migrations" to version "2 - Add users" failed! Changes successfully rolled back.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  30.820 s
+[INFO] Finished at: 2024-07-01T15:18:08-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.flywaydb:flyway-maven-plugin:10.10.0:migrate (default-cli) on project watch: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V2__Add_users.sql failed
+[ERROR] ----------------------------------
+[ERROR] SQL State  : 23502
+[ERROR] Error Code : 0
+[ERROR] Message    : ERROR: null value in column "role_id" of relation "user_roles" violates not-null constraint
+[ERROR]   Detail: Failing row contains (1, null).
+[ERROR] Location   : /home/nemesis/Documents/allaboutevemirolive/curr_/omega/src/main/resources/db/migration/V2__Add_users.sql (/home/nemesis/Documents/allaboutevemirolive/curr_/omega/src/main/resources/db/migration/V2__Add_users.sql)
+[ERROR] Line       : 5
+[ERROR] Statement  : INSERT INTO user_roles (user_id, role_id)
+[ERROR] VALUES (
+[ERROR]     (SELECT id FROM users WHERE email = 'user1@example.com'),
+[ERROR]     (SELECT id FROM roles WHERE name = 'ADMIN')
+[ERROR] )
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

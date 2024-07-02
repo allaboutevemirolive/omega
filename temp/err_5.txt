@@ -1,0 +1,44 @@
+nemesis@debian:~/Documents/allaboutevemirolive/curr_/omega$ mvn flyway:migrate -Dflyway.schemas=watch_migrations -Dflyway.url=jdbc:postgresql://localhost/watch -Dflyway.user=watch_app -Dflyway.password=123456789
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.omega:watch >---------------------------
+[INFO] Building watch 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- flyway:10.10.0:migrate (default-cli) @ watch ---
+[INFO] Database: jdbc:postgresql://localhost/watch (PostgreSQL 15.7)
+[INFO] Successfully validated 5 migrations (execution time 00:00.041s)
+[INFO] Current version of schema "watch_migrations": 4
+[INFO] Migrating schema "watch_migrations" to version "5 - Add orders"
+[ERROR] Migration of schema "watch_migrations" to version "5 - Add orders" failed! Changes successfully rolled back.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.960 s
+[INFO] Finished at: 2024-07-01T16:41:08-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.flywaydb:flyway-maven-plugin:10.10.0:migrate (default-cli) on project watch: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V5__Add_orders.sql failed
+[ERROR] -----------------------------------
+[ERROR] SQL State  : 23503
+[ERROR] Error Code : 0
+[ERROR] Message    : ERROR: insert or update on table "orders" violates foreign key constraint "orders_user_id_fkey"
+[ERROR]   Detail: Key (user_id)=(12) is not present in table "users".
+[ERROR] Location   : /home/nemesis/Documents/allaboutevemirolive/curr_/omega/src/main/resources/db/migration/V5__Add_orders.sql (/home/nemesis/Documents/allaboutevemirolive/curr_/omega/src/main/resources/db/migration/V5__Add_orders.sql)
+[ERROR] Line       : 2
+[ERROR] Statement  : -- Insert orders first
+[ERROR] INSERT INTO orders (total_price, date, post_index, user_id, status, payment_id)
+[ERROR] VALUES 
+[ERROR]     (9500.50, '2024-06-28 10:30:00', '12345', 11, 'PROCESSING', 1),
+[ERROR]     (9500.25, '2024-06-29 14:45:00', '67890', 12, 'SHIPPED', 2),
+[ERROR]     (9500.00, '2024-06-30 09:15:00', '54321', 13, 'DELIVERED', 3),
+[ERROR]     (9500.99, '2024-06-25 18:00:00', '98765', 14, 'PROCESSING', 4),
+[ERROR]     (9500.75, '2024-06-27 12:20:00', '45678', 15, 'SHIPPED', 5)
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
