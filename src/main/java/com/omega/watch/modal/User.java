@@ -53,13 +53,13 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<UserRole> roles;
+    private Set<Role> roles;
 
     public User() {
     }
 
     public User(String email, String password, String firstName, String lastName, String city, String address,
-            String phoneNumber, String postIndex, boolean active, Set<UserRole> roles) {
+            String phoneNumber, String postIndex, boolean active, Set<Role> roles) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -152,12 +152,11 @@ public class User {
         this.active = active;
     }
 
-    public Set<UserRole> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<UserRole> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 }

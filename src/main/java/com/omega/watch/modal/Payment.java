@@ -1,17 +1,8 @@
 package com.omega.watch.modal;
 
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "payments")
@@ -22,11 +13,10 @@ public class Payment {
     private Long id;
 
     @Column(nullable = false)
-    private Double amount;
+    private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PaymentMethod paymentMethod;
+    @Column(name = "payment_method", nullable = false)
+    private String paymentMethod;
 
     @Column(name = "transaction_id")
     private String transactionId;
@@ -34,20 +24,15 @@ public class Payment {
     @Column(name = "payment_date", nullable = false)
     private LocalDateTime paymentDate;
 
-    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
-    private Order order;
-
     public Payment() {
 
     }
 
-    public Payment(Double amount, PaymentMethod paymentMethod, String transactionId, LocalDateTime paymentDate,
-            Order order) {
+    public Payment(BigDecimal amount, String paymentMethod, String transactionId, LocalDateTime paymentDate) {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.transactionId = transactionId;
         this.paymentDate = paymentDate;
-        this.order = order;
     }
 
     public Long getId() {
@@ -58,19 +43,19 @@ public class Payment {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -90,11 +75,4 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 }
